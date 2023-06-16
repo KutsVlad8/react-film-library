@@ -12,12 +12,12 @@ const MoviesDetails = () => {
       try {
         const movie = await getMovieInfo(movieId);
         console.log(movie.overview);
-        setMovieInfo(prevMovie => ({ ...prevMovie, movie }));
+        setMovieInfo(movie);
       } catch (error) {}
     }
 
     fetch();
-  });
+  }, [movieId, setMovieInfo]);
   console.log(movieInfo);
   return (
     <div>
