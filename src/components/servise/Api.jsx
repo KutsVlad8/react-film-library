@@ -24,3 +24,25 @@ export async function getMovieInfo(movie_id) {
     })
     .catch(error => console.log(error));
 }
+
+// Отримує актерський состав фільму
+export async function getMovieCast(movie_id) {
+  const url = `${MAIN_URL}/movie/${movie_id}/credits?api_key=${API_KEY}`;
+  return await axios
+    .get(url)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => console.log(error));
+}
+
+// Отримує актерський состав фільму
+export async function getMovieReviews(movie_id) {
+  const url = `${MAIN_URL}/movie/${movie_id}/reviews?api_key=${API_KEY}`;
+  return await axios
+    .get(url)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => console.log(error));
+}

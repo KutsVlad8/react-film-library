@@ -1,6 +1,6 @@
 import MoviesList from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
-import { getDayTrending } from '../components/servise/Api';
+import { getDayTrending } from '../../components/servise/Api';
 import { Title } from './Home.styled';
 
 const Home = () => {
@@ -10,7 +10,6 @@ const Home = () => {
     async function fetch() {
       try {
         const movies = await getDayTrending();
-        // console.log(movies.results);
         setTrendingMovies([...movies.results]);
       } catch (error) {
         console.log(error);
