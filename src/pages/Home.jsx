@@ -1,6 +1,7 @@
 import MoviesList from 'components/MoviesList/MoviesList';
 import { useEffect, useState } from 'react';
 import { getDayTrending } from '../components/servise/Api';
+import { Title } from './Home.styled';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -11,16 +12,17 @@ const Home = () => {
         const movies = await getDayTrending();
         // console.log(movies.results);
         setTrendingMovies([...movies.results]);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     fetch();
   }, []);
 
-  // console.log(trendingMovies);
   return (
     <>
-      <h1>Trending today </h1>
+      <Title>Trending today </Title>
       <MoviesList trendingMovies={trendingMovies} />
     </>
   );

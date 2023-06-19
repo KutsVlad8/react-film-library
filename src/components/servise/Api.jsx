@@ -15,8 +15,8 @@ export async function getDayTrending(page = 1) {
 }
 
 // Отримує параметр поточного фільму
-export async function getMovieInfo(id) {
-  const url = `${MAIN_URL}/movie/${id}?api_key=${API_KEY}`;
+export async function getMovieInfo(movie_id) {
+  const url = `${MAIN_URL}/movie/${movie_id}?api_key=${API_KEY}`;
   return await axios
     .get(url)
     .then(response => {

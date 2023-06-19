@@ -1,34 +1,50 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import { getMovieInfo } from 'components/servise/Api';
 
 const MoviesDetails = () => {
   const { movieId } = useParams();
-  const { movieInfo, setMovieInfo } = useParams({});
-  console.log(movieId);
+  const [movieInfo, setMovieInfo] = useState({});
 
   useEffect(() => {
-    async function fetch() {
+    if (movieInfo === {}) {
+      return;
+    }
+    const fetch = async () => {
       try {
         const movie = await getMovieInfo(movieId);
-        console.log(movie.overview);
+
         setMovieInfo(movie);
-      } catch (error) {}
-    }
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     fetch();
-  }, [movieId, setMovieInfo]);
+  }, []);
+
   console.log(movieInfo);
   return (
     <div>
-      {/* <img
-        src={`https://image.tmdb.org/t/p/w300${movieInfo.poster_path}`}
-        alt=""
+      <img
+        src={`https://image.tmdb.org/t/p/w500${movieInfo.poster_path}`}
+        alt="{movieInfo.title || movieInfo.name}"
       />
       <div>
         <h2>{movieInfo.title || movieInfo.name}</h2>
         <p>{movieInfo.overview}</p>
-      </div> */}
+        {/* {movieInfo.genres.map(genre => console.log(genre))} */}
+      </div>
+
+      <ul>
+        <li>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li>
+          <Link to="reviews">Rewies</Link>
+        </li>
+      </ul>
+      <Outlet />
     </div>
   );
 };

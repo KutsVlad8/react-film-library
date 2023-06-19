@@ -1,22 +1,22 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { List, ListItem, ListLinkItem, Title, Img } from './MoviesList.styled';
 
 const MoviesList = ({ trendingMovies }) => {
-  console.log(trendingMovies);
   return (
     <>
-      <ul>
+      <List>
         {trendingMovies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>
-              <h2>{movie.title || movie.name}</h2>
-              <img
+          <ListItem key={movie.id}>
+            <ListLinkItem to={`/movies/${movie.id}`}>
+              <Title>{movie.title || movie.name}</Title>
+              <Img
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                alt=""
+                alt={movie.title || movie.name}
               />
-            </Link>
-          </li>
+            </ListLinkItem>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 };
