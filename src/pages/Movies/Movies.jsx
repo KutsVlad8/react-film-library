@@ -1,20 +1,26 @@
-import SearchBar from 'components/SearchBar/SearchBar';
 import { useState, useEffect } from 'react';
-import Notiflix from 'notiflix';
-import { getSearchMovie } from 'components/servise/Api';
+import { useSearchParams } from 'react-router-dom';
+import SearchBar from 'components/SearchBar/SearchBar';
 import MoviesList from 'components/MoviesList/MoviesList';
+import { getSearchMovie } from 'components/servise/Api';
+import Notiflix from 'notiflix';
 
 const Movies = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [searchMovies, setSearchMovies] = useState([]);
+  const [totalMovies, setTotalMovies] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') ?? '';
 
   const handleSubmitForm = newQuery => {
-    if (newQuery === searchQuery) {
+    if (newQuery === '') {
+      Notiflix.Notify.failure('Поле ввода пустое');
+      return;
+    } else if (newQuery === searchQuery) {
       Notiflix.Notify.info(`Фильмы по запросу  ${newQuery} уже отображались.`);
       return;
     }
 
-    setSearchQuery(newQuery);
+    setSearchParams({ search: newQuery });
   };
 
   useEffect(() => {
@@ -25,8 +31,9 @@ const Movies = () => {
     async function fetch() {
       try {
         const movies = await getSearchMovie(searchQuery);
-        console.log(movies.results);
+        console.log(movies);
         setSearchMovies([...movies.results]);
+        setTotalMovies(movies.total_results);
       } catch (error) {
         // setError(error.message);
         console.log(error);
@@ -41,6 +48,13 @@ const Movies = () => {
   return (
     <>
       <SearchBar onSubmit={handleSubmitForm}></SearchBar>
+
+      {totalMovies === 0 && (
+        <>
+          <p>По вашему запросу {searchMovies} ни чего не найдено</p>
+        </>
+      )}
+
       {searchMovies && <MoviesList movies={searchMovies} />}
     </>
   );
