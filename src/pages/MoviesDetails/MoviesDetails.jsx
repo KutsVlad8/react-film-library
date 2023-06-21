@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, Suspense } from 'react';
 
-import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { getMovieInfo } from 'components/servise/Api';
 import {
   Card,
