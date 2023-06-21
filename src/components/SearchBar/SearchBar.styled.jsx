@@ -23,6 +23,7 @@ export const SearchFormInput = styled.input`
   outline: none;
   padding-left: 4px;
   padding-right: 4px;
+  color: darkslategray;
 
   border: 1px solid darkslategray;
   border-radius: 3px;
@@ -38,6 +39,8 @@ export const SearchFormButton = styled.button`
 
   height: 28px;
 
+  background-color: white;
+  color: darkslategray;
   border: 1px solid darkslategray;
   border-radius: 3px;
 

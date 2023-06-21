@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Suspense } from 'react';
+
 import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
 import { getMovieInfo } from 'components/servise/Api';
 import {
@@ -9,7 +10,12 @@ import {
   InfoListItem,
   InfoListItemLink,
   Img,
+  BackLink,
+  MovieName,
+  Title,
+  Content,
 } from './MoviesDetails.styled';
+import { Loader } from 'components/Loader/Loader';
 import img from '../../images/noFoto.jpg';
 
 const MoviesDetails = () => {
@@ -17,9 +23,6 @@ const MoviesDetails = () => {
   const [movieInfo, setMovieInfo] = useState({});
   const location = useLocation();
   const backLocation = useRef(location.state?.from ?? '/');
-
-  console.log(location);
-  console.log(backLocation);
 
   useEffect(() => {
     const fetch = async () => {
@@ -37,9 +40,11 @@ const MoviesDetails = () => {
 
   const genres = movieInfo.genres;
 
+  console.log(movieInfo);
+
   return (
     <>
-      <Link to={backLocation.current}>Back </Link>
+      <BackLink to={backLocation.current}>Back </BackLink>
       <Card>
         <Img
           src={
@@ -50,21 +55,26 @@ const MoviesDetails = () => {
           alt={movieInfo.title || movieInfo.name}
         />
         <CardContent>
-          <h2>{movieInfo.title || movieInfo.name}</h2>
-          <h3>Overview</h3>
-          <p> {movieInfo.overview}</p>
-          <h3>Genres</h3>
+          <MovieName>{movieInfo.title || movieInfo.name}</MovieName>
+          <Title>Release</Title>
+          <Content> {movieInfo.release_date}</Content>
+          <Title>Overview</Title>
+          <Content> {movieInfo.overview}</Content>
+
+          <Title>Genres</Title>
           <GenresList>
             {genres ? (
               genres.map(genre => (
                 <li key={genre.id}>
-                  <p>{genre.name}</p>
+                  <Content>{genre.name}</Content>
                 </li>
               ))
             ) : (
               <p>no genres</p>
             )}
           </GenresList>
+          <Title>Runtime</Title>
+          <Content> {movieInfo.runtime} min</Content>
         </CardContent>
       </Card>
       <InfoList>
@@ -76,7 +86,9 @@ const MoviesDetails = () => {
         </InfoListItem>
       </InfoList>
 
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
