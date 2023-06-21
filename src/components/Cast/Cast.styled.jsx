@@ -11,9 +11,14 @@ export const ListCast = styled.ul`
 `;
 
 export const ListCastItem = styled.li`
-  flex-basis: calc((100% - 2 * 30px) / 3);
+  flex-basis: calc((100% - 4 * 30px) / 5);
+`;
+
+export const Name = styled.p`
+  margin-top: 0;
 `;
 
 export const Img = styled.img`
   width: 100%;
+  border-radius: 5px;
 `;

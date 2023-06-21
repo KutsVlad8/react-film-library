@@ -1,7 +1,7 @@
 import { getMovieCast } from 'components/servise/Api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Img, ListCast, ListCastItem } from './Cast.styled';
+import { Img, ListCast, ListCastItem, Name } from './Cast.styled';
 
 const Cast = () => {
   const [movieCast, setMovieCast] = useState([]);
@@ -26,7 +26,7 @@ const Cast = () => {
       <ListCast>
         {movieCast.map(actor => (
           <ListCastItem key={actor.cast_id}>
-            <p>{actor.name}</p>
+            <Name>{actor.name}</Name>
             <Img
               // src="../images/noFoto.jpg"
               src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`}

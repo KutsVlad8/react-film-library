@@ -14,6 +14,17 @@ export async function getDayTrending(page = 1) {
     .catch(error => console.log(error));
 }
 
+// Робить пошук поточного фільму
+export async function getSearchMovie(query) {
+  const url = `${MAIN_URL}/search/movie?api_key=${API_KEY}&query=${query}`;
+  return await axios
+    .get(url)
+    .then(response => {
+      return response.data;
+    })
+    .catch(error => console.log(error));
+}
+
 // Отримує параметр поточного фільму
 export async function getMovieInfo(movie_id) {
   const url = `${MAIN_URL}/movie/${movie_id}?api_key=${API_KEY}`;

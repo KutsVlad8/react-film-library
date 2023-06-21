@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <>
       <Title>Trending today </Title>
-      <MoviesList trendingMovies={trendingMovies} />
+      <MoviesList movies={trendingMovies} />
     </>
   );
 };

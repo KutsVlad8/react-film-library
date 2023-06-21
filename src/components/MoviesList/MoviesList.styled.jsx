@@ -26,7 +26,7 @@ export const Title = styled.h2`
 `;
 
 export const Img = styled.img`
-display: block;
-width: 100%;
-}
+  display: block;
+  width: 100%;
+  border-radius: 8px;
 `;
