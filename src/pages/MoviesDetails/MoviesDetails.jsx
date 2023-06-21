@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
 import { getMovieInfo } from 'components/servise/Api';
 import {
   Card,
@@ -15,6 +15,11 @@ import img from '../../images/noFoto.jpg';
 const MoviesDetails = () => {
   const { movieId } = useParams();
   const [movieInfo, setMovieInfo] = useState({});
+  const location = useLocation();
+  const backLocation = useRef(location.state?.from ?? '/');
+
+  console.log(location);
+  console.log(backLocation);
 
   useEffect(() => {
     const fetch = async () => {
@@ -31,10 +36,10 @@ const MoviesDetails = () => {
   }, [movieId]);
 
   const genres = movieInfo.genres;
-  console.log(genres);
 
   return (
     <>
+      <Link to={backLocation.current}>Back </Link>
       <Card>
         <Img
           src={

@@ -1,14 +1,15 @@
-// import { Link } from 'react-router-dom';
 import { List, ListItem, ListLinkItem, Title, Img } from './MoviesList.styled';
 import img from '../../images/noFoto.jpg';
+import { useLocation } from 'react-router-dom';
 
 const MoviesList = ({ movies }) => {
+  const location = useLocation();
   return (
     <>
       <List>
         {movies.map(movie => (
           <ListItem key={movie.id}>
-            <ListLinkItem to={`/movies/${movie.id}`}>
+            <ListLinkItem to={`/movies/${movie.id}`} state={{ from: location }}>
               <Title>{movie.title || movie.name}</Title>
               <Img
                 src={
