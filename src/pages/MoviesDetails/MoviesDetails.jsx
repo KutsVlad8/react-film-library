@@ -8,7 +8,9 @@ import {
   InfoList,
   InfoListItem,
   InfoListItemLink,
+  Img,
 } from './MoviesDetails.styled';
+import img from '../../images/noFoto.jpg';
 
 const MoviesDetails = () => {
   const { movieId } = useParams();
@@ -34,8 +36,12 @@ const MoviesDetails = () => {
   return (
     <>
       <Card>
-        <img
-          src={`https://image.tmdb.org/t/p/w300${movieInfo.poster_path}`}
+        <Img
+          src={
+            movieInfo.poster_path
+              ? `https://image.tmdb.org/t/p/w300${movieInfo.poster_path}`
+              : img
+          }
           alt={movieInfo.title || movieInfo.name}
         />
         <CardContent>

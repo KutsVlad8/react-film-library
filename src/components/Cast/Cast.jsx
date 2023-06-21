@@ -2,6 +2,7 @@ import { getMovieCast } from 'components/servise/Api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Img, ListCast, ListCastItem, Name } from './Cast.styled';
+import img from '../../images/noFoto.jpg';
 
 const Cast = () => {
   const [movieCast, setMovieCast] = useState([]);
@@ -29,7 +30,11 @@ const Cast = () => {
             <Name>{actor.name}</Name>
             <Img
               // src="../images/noFoto.jpg"
-              src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`}
+              src={
+                actor.profile_path
+                  ? `https://image.tmdb.org/t/p/w300${actor.profile_path}`
+                  : img
+              }
               alt={actor.name}
             />
           </ListCastItem>

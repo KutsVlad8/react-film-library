@@ -17,6 +17,10 @@ export const InfoList = styled.ul`
 
 export const InfoListItem = styled.li``;
 
+export const Img = styled.img`
+  width: 300px;
+`;
+
 export const InfoListItemLink = styled(Link)`
   text-decoration: none;
   color: darkslategray;
