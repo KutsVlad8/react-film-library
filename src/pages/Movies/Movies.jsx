@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import SearchBar from 'components/SearchBar/SearchBar';
 import MoviesList from 'components/MoviesList/MoviesList';
 import { getSearchMovie } from 'components/servise/Api';
+import { Content } from './Movies.styled';
 import Notiflix from 'notiflix';
 
 const Movies = () => {
@@ -13,10 +14,12 @@ const Movies = () => {
 
   const handleSubmitForm = newQuery => {
     if (newQuery === '') {
-      Notiflix.Notify.failure('Поле ввода пустое');
+      Notiflix.Notify.failure('The input field is blank');
       return;
     } else if (newQuery === searchQuery) {
-      Notiflix.Notify.info(`Фильмы по запросу  ${newQuery} уже отображались.`);
+      Notiflix.Notify.info(
+        `Movies on demand ${newQuery} are already displayed`
+      );
       return;
     }
 
@@ -51,7 +54,7 @@ const Movies = () => {
 
       {totalMovies === 0 && (
         <>
-          <p>По вашему запросу {searchMovies} ни чего не найдено</p>
+          <Content>Nothing was found for your search {searchMovies}</Content>
         </>
       )}
 
