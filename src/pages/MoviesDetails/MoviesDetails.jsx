@@ -36,7 +36,7 @@ const MoviesDetails = () => {
       <Card>
         <img
           src={`https://image.tmdb.org/t/p/w300${movieInfo.poster_path}`}
-          alt="{movieInfo.title || movieInfo.name}"
+          alt={movieInfo.title || movieInfo.name}
         />
         <CardContent>
           <h2>{movieInfo.title || movieInfo.name}</h2>
